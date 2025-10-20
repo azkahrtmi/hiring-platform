@@ -2,6 +2,7 @@ import { useState } from "react";
 import FieldConfigSelector from "../../components/FieldConfigSelector";
 import { defaultApplicantFields, type ApplicantField } from "../../utils/jobFormConfig";
 import { useNavigate } from "react-router-dom";
+import AdminLayout from "../../components/admin/AdminLayout";
 
 export default function CreateJob() {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ export default function CreateJob() {
   };
 
   return (
+    <AdminLayout>
     <div className="p-8 max-w-3xl mx-auto">
       <h1 className="text-2xl font-semibold mb-6">Create Job</h1>
 
@@ -115,5 +117,6 @@ export default function CreateJob() {
         </div>
       </form>
     </div>
+    </AdminLayout>
   );
 }
