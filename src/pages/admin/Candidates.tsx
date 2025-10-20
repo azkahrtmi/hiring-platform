@@ -6,19 +6,29 @@ import AdminLayout from "../../components/admin/AdminLayout";
 
 export default function Candidates() {
   const [searchTerm, setSearchTerm] = useState("");
+
   const filtered = mockCandidates.filter((c) =>
     c.full_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-        <AdminLayout>
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Candidates</h1>
+    <AdminLayout>
+      <div className="min-h-screen p-8">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">Applicants</h1>
+          <p className="text-gray-500">Manage and review job applications</p>
+        </div>
+
+        {/* Card Container */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <TableToolbar
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+          />
+          <CandidateTable data={filtered} />
+        </div>
       </div>
-      <TableToolbar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-      <CandidateTable data={filtered} />
-    </div>
-        </AdminLayout>
+    </AdminLayout>
   );
 }

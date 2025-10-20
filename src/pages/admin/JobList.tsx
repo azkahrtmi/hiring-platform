@@ -11,7 +11,6 @@ export default function JobList() {
 
   return (
     <AdminLayout>
-      {/* Header section */}
       <div className="flex justify-between mb-6 items-center">
         <div className="flex flex-col">
           <h1 className="text-2xl font-bold text-gray-900">Job Posts</h1>
@@ -20,7 +19,6 @@ export default function JobList() {
         <Button variant="primary">+ Create Job Post</Button>
       </div>
 
-      {/* Kondisi jika tidak ada data */}
       {jobs.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-gray-500">
           <svg
@@ -52,7 +50,7 @@ export default function JobList() {
               {/* Card Header */}
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center text-center gap-2">
                     <h2 className="text-xl font-semibold">{job.title}</h2>
                     <span
                       className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
@@ -105,9 +103,14 @@ export default function JobList() {
               </p>
 
               {/* Salary */}
-              <p className="text-green-600 text-sm font-semibold">
-                {job.salary_range.display_text}
-              </p>
+              <div className="flex justify-between">
+                <p className="text-green-600 text-sm font-semibold">
+                  {job.salary_range.display_text}
+                </p>
+                <button className="cursor-pointer bg-green-800 text-white py-1.5 rounded-md text-xs px-3 items-center text-center hover:bg-green-600">
+                  Manage Job
+                </button>
+              </div>
             </Card>
           ))}
         </div>

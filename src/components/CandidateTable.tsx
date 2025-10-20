@@ -30,7 +30,7 @@ export default function CandidateTable({ data }: Props) {
   const [dragOverCol, setDragOverCol] = useState<number | null>(null);
   const resizingRef = useRef<number | null>(null);
 
-  // Drag to reorder
+  // Drag reorder
   const handleDragStart = (index: number) => setDragCol(index);
   const handleDragOver = (index: number) => setDragOverCol(index);
   const handleDrop = () => {
@@ -54,14 +54,13 @@ export default function CandidateTable({ data }: Props) {
   };
   const handleMouseUp = () => (resizingRef.current = null);
 
-  // Attach listeners
   window.addEventListener("mousemove", handleMouseMove);
   window.addEventListener("mouseup", handleMouseUp);
 
   return (
-    <div className="border rounded-lg overflow-x-auto shadow-sm">
-      <table className="w-full border-collapse text-sm">
-        <thead className="bg-gray-100">
+    <div className="mt-4 border border-gray-200 rounded-lg overflow-x-auto">
+      <table className="w-full border-collapse text-sm text-slate-700">
+        <thead className="bg-gray-50 text-gray-600 font-semibold">
           <tr>
             {columns.map((col, index) => (
               <th
@@ -71,7 +70,7 @@ export default function CandidateTable({ data }: Props) {
                 onDragOver={() => handleDragOver(index)}
                 onDrop={handleDrop}
                 style={{ width: col.width }}
-                className={`relative text-left px-3 py-2 border-b font-semibold select-none ${
+                className={`relative text-left px-4 py-3 border-b border-gray-200 select-none ${
                   dragOverCol === index ? "bg-blue-50" : ""
                 }`}
               >
@@ -84,22 +83,41 @@ export default function CandidateTable({ data }: Props) {
             ))}
           </tr>
         </thead>
+
         <tbody>
-          {data.map((cand) => (
-            <tr key={cand.id} className="border-b hover:bg-gray-50">
-              {columns.map((col) => (
-                <td key={col.key} style={{ width: col.width }} className="px-3 py-2 truncate">
-                  {col.key === "linkedin" ? (
-                    <a href={cand[col.key as keyof Candidate] as string} className="text-blue-600 hover:underline">
-                      {cand[col.key as keyof Candidate] as string}
-                    </a>
-                  ) : (
-                    cand[col.key as keyof Candidate]
-                  )}
-                </td>
-              ))}
+          {data.length === 0 ? (
+            <tr>
+              <td
+                colSpan={columns.length}
+                className="text-center py-12 text-gray-500 bg-white"
+              >
+                No applicants found
+              </td>
             </tr>
-          ))}
+          ) : (
+            data.map((cand) => (
+              <tr key={cand.id} className="border-b hover:bg-gray-50">
+                {columns.map((col) => (
+                  <td
+                    key={col.key}
+                    style={{ width: col.width }}
+                    className="px-4 py-2 truncate"
+                  >
+                    {col.key === "linkedin" ? (
+                      <a
+                        href={cand[col.key as keyof Candidate] as string}
+                        className="text-blue-600 hover:underline"
+                      >
+                        {cand[col.key as keyof Candidate] as string}
+                      </a>
+                    ) : (
+                      cand[col.key as keyof Candidate]
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
