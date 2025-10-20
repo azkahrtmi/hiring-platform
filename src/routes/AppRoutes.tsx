@@ -13,10 +13,6 @@ export default function AppRoutes() {
         <Route path="/admin/create" element={<CreateJob />} />
         <Route path="/admin/candidates/:jobId" element={<Candidates />} />
 
-        {/* Applicant Routes */}
-        {/* <Route path="/" element={<ApplicantJobList />} />
-        <Route path="/job/:slug" element={<JobDetail />} />
-        <Route path="/apply/:slug" element={<ApplyJob />} /> */}
       </Routes>
     </Router>
   );
