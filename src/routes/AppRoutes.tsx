@@ -2,9 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AdminJobList from "../pages/admin/JobList";
 import CreateJob from "../pages/admin/CreateJob";
 import Candidates from "../pages/admin/Candidates";
-// import ApplicantJobList from "../pages/applicant/JobList";
-// import JobDetail from "../pages/applicant/JobDetail";
-// import ApplyJob from "../pages/applicant/ApplyJob";
+
 
 export default function AppRoutes() {
   return (
