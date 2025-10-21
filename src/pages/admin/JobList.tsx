@@ -5,9 +5,12 @@ import Button from "../../components/ui/Button";
 import { CiCalendarDate } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { FiEye, FiEdit2, FiTrash2 } from "react-icons/fi";
+import { useState } from "react";
+import CreateJob from "./CreateJob";
 
 export default function JobList() {
   const jobs = mockJobs || [];
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <AdminLayout>
@@ -16,7 +19,9 @@ export default function JobList() {
           <h1 className="text-2xl font-bold text-gray-900">Job Posts</h1>
           <span className="text-gray-500">Create and manage job listings</span>
         </div>
-        <Button variant="primary">+ Create Job Post</Button>
+        <Button onClick={() => setIsModalOpen(true)} variant="primary">
+          + Create Job Post
+        </Button>
       </div>
 
       {jobs.length === 0 ? (
@@ -115,6 +120,7 @@ export default function JobList() {
           ))}
         </div>
       )}
+      <CreateJob isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </AdminLayout>
   );
 }
