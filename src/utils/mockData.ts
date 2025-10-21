@@ -1,4 +1,4 @@
-export const mockJobs: any[] = [
+export const mockJobs = [
   {
     id: "job_001",
     slug: "frontend-developer",
@@ -12,6 +12,13 @@ export const mockJobs: any[] = [
     job_type: "Full-time",
     location: "Batam",
     job_started: "10 October 2025",
+    posted_date: "2025-09-30",
+    closing_date: "2025-11-30",
+    total_applicants: 5,
+    created_by: "Admin Rakamin",
+    tags: ["React", "Frontend", "JavaScript"],
+    experience_level: "Mid-level",
+    education: "Bachelor's Degree in Computer Science",
     salary_range: {
       min: 7000000,
       max: 8000000,
@@ -32,31 +39,18 @@ export const mockJobs: any[] = [
     job_type: "Contract",
     location: "Jakarta",
     job_started: "01 November 2025",
+    posted_date: "2025-10-01",
+    closing_date: "2025-12-01",
+    total_applicants: 3,
+    created_by: "Admin Rakamin",
+    tags: ["UI/UX", "Figma", "Design System"],
+    experience_level: "Junior",
+    education: "Bachelor's Degree in Visual Design",
     salary_range: {
       min: 6000000,
       max: 7500000,
       currency: "IDR",
       display_text: "Rp6.000.000 - Rp7.500.000",
-    },
-  },
-  {
-    id: "job_003",
-    slug: "backend-developer",
-    title: "Backend Developer",
-    department: "Engineering",
-    description:
-      "We are seeking a Backend Developer to build scalable APIs and optimize server-side performance. You’ll collaborate with frontend developers and DevOps engineers to ensure seamless integration.",
-    requirement:
-      "Experience with Node.js, Express, PostgreSQL, and REST APIs. Understanding of microservices architecture and containerization (Docker, Kubernetes).",
-    status: "active",
-    job_type: "Full-time",
-    location: "Yogyakarta",
-    job_started: "15 October 2025",
-    salary_range: {
-      min: 8000000,
-      max: 9500000,
-      currency: "IDR",
-      display_text: "Rp8.000.000 - Rp9.500.000",
     },
   },
 ];
