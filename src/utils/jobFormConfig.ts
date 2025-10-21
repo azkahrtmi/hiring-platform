@@ -4,12 +4,13 @@ export interface ApplicantField {
   state: "mandatory" | "optional" | "off";
 }
 
-export const defaultApplicantFields: ApplicantField[] = [
-  { key: "full_name", label: "Full Name", state: "mandatory" },
+export const defaultApplicantFields = [
+  { key: "photo", label: "Photo Profile", state: "mandatory" },
+  { key: "full_name", label: "Full name", state: "mandatory" },
+  { key: "birth_date", label: "Date of birth", state: "mandatory" },
+  { key: "gender", label: "Pronoun (gender)", state: "mandatory" },
+  { key: "domicile", label: "Domicile", state: "mandatory" },
+  { key: "phone", label: "Phone number", state: "mandatory" },
   { key: "email", label: "Email", state: "mandatory" },
-  { key: "linkedin_link", label: "LinkedIn", state: "optional" },
-  { key: "domicile", label: "Domicile", state: "optional" },
-  { key: "gender", label: "Gender", state: "off" },
-  { key: "phone_number", label: "Phone Number", state: "mandatory" },
-  { key: "date_of_birth", label: "Date of Birth", state: "off" },
+  { key: "linkedin", label: "Link LinkedIn", state: "optional" },
 ];
