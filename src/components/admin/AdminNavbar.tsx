@@ -34,7 +34,7 @@ export default function AdminNavbar() {
           <div className="p-2 bg-blue-600 rounded-xl shadow-sm">
             <FaBriefcase className="text-white w-6 h-6" />
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
             <h1 className="text-xl font-bold text-gray-900 leading-none">
               Rakamin
             </h1>
