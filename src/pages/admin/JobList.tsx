@@ -7,6 +7,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FiEye, FiEdit2, FiTrash2 } from "react-icons/fi";
 import { useState } from "react";
 import CreateJob from "./CreateJob";
+import { Link } from "react-router-dom";
 
 export default function JobList() {
   const jobs = mockJobs || [];
@@ -112,9 +113,12 @@ export default function JobList() {
                 <p className="text-green-600 text-sm font-semibold">
                   {job.salary_range.display_text}
                 </p>
-                <button className="cursor-pointer bg-green-800 text-white py-1.5 rounded-md text-xs px-3 items-center text-center hover:bg-green-600">
+                <Link
+                  to={`/admin/manage/${job.id}`}
+                  className="cursor-pointer bg-green-800 text-white py-1.5 rounded-md text-xs px-3 items-center text-center hover:bg-green-600"
+                >
                   Manage Job
-                </button>
+                </Link>
               </div>
             </Card>
           ))}

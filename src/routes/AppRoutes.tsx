@@ -7,16 +7,25 @@ import ApplicantJobList from "../pages/applicant/JobList";
 import JobDetail from "../pages/applicant/JobDetail";
 import ApplyJob from "../pages/applicant/ApplyJob";
 
-
 export default function AppRoutes() {
   return (
     <Router>
       <Routes>
         {/* Admin Routes */}
         <Route path="/admin/jobs" element={<AdminJobList />} />
-        <Route path="/admin/create" element={<CreateJob />} />
-        <Route path="/admin/candidates/:jobId" element={<Candidates />} />
+        <Route
+          path="/admin/create"
+          element={
+            <CreateJob
+              isOpen={false}
+              onClose={function (): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
+          }
+        />
 
+        <Route path="/admin/manage/:jobId" element={<Candidates />} />
 
         {/* Applicant Routes */}
         <Route path="/" element={<ApplicantJobList />} />

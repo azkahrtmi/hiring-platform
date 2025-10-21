@@ -1,9 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
-import { FaBriefcase, FaUserFriends } from "react-icons/fa";
+import { FaBriefcase } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
+import { mockJobs } from "../../utils/mockData";
 
 export default function AdminNavbar() {
   const { pathname } = useLocation();
+
+  const match = pathname.match(/\/admin\/manage\/(job_\d+)/);
+  const currentJobId = match ? match[1] : null;
+  const currentJob = mockJobs.find((job) => job.id === currentJobId);
 
   const links = [
     {
@@ -11,15 +16,19 @@ export default function AdminNavbar() {
       label: "Job Posts",
       icon: <FaBriefcase className="mr-2" />,
     },
-    {
-      to: "/admin/candidates/1",
-      label: "Applicants",
-      icon: <FaUserFriends className="mr-2" />,
-    },
+    ...(currentJob
+      ? [
+          {
+            to: `/admin/manage/${currentJob.id}`,
+            label: currentJob.title,
+          },
+        ]
+      : []),
   ];
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-sm">
+      {/* Top Section */}
       <div className="flex justify-between items-center px-10 py-3">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-blue-600 rounded-xl shadow-sm">
@@ -33,30 +42,34 @@ export default function AdminNavbar() {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 text-gray-700">
-          <button className="flex items-center text-gray-600 hover:text-blue-600 transition cursor-pointer">
-            <FiLogOut className="mr-1" />
-            <span className="font-medium text-sm">Sign Out</span>
-          </button>
-        </div>
+        <button className="flex items-center text-gray-600 hover:text-blue-600 transition cursor-pointer">
+          <FiLogOut className="mr-1" />
+          <span className="font-medium text-sm">Sign Out</span>
+        </button>
       </div>
 
-      <div className="flex gap-8 px-10 border-t border-gray-100 bg-white">
-        {links.map((link) => {
+      {/* Bottom Nav (Breadcrumb Style) */}
+      <div className="flex items-center gap-2 px-10 border-t border-gray-100 bg-white text-sm font-medium py-2">
+        {links.map((link, index) => {
           const isActive = pathname.startsWith(link.to);
+          const isLast = index === links.length - 1;
+
           return (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`flex items-center py-3 text-sm font-medium border-b-2 ${
-                isActive
-                  ? "text-blue-700 border-blue-700"
-                  : "text-gray-600 border-transparent hover:text-blue-600"
-              } transition`}
-            >
-              {link.icon}
-              {link.label}
-            </Link>
+            <div key={link.to} className="flex items-center">
+              <Link
+                to={link.to}
+                className={`flex items-center transition ${
+                  isActive
+                    ? "text-blue-700"
+                    : "text-gray-600 hover:text-blue-600"
+                }`}
+              >
+                {link.icon}
+                {link.label}
+              </Link>
+
+              {!isLast && <span className="mx-2 text-gray-400">{">"}</span>}
+            </div>
           );
         })}
       </div>
