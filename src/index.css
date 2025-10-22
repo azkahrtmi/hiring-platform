@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+.rdp {
+  font-size: 13px;
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: #fff7e6;
+  color: #f59e0b;
+  border-radius: 9999px;
+  border: 1px solid #f59e0b;
+}
+
+.rdp-caption_label {
+  font-weight: 500;
+}
+
+.rdp-nav_button {
+  color: #1d4ed8;
+}
+
+.rdp-dropdown {
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}

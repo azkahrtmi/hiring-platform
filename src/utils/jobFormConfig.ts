@@ -12,5 +12,5 @@ export const defaultApplicantFields = [
   { key: "domicile", label: "Domicile", state: "mandatory" },
   { key: "phone", label: "Phone number", state: "mandatory" },
   { key: "email", label: "Email", state: "mandatory" },
-  { key: "linkedin", label: "Link LinkedIn", state: "optional" },
+  { key: "linkedin", label: "Link LinkedIn", state: "mandatory" },
 ];

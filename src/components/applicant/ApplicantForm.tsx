@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FiCamera } from "react-icons/fi";
 import { defaultApplicantFields } from "../../utils/jobFormConfig";
+import DatePicker from "../DatePicker";
+import HandGestureCamera from "../HandGestureCamera";
 
 interface ApplicantFormProps {
   jobTitle: string;
@@ -11,6 +13,7 @@ export default function ApplicantForm({ jobTitle }: ApplicantFormProps) {
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [errorFields, setErrorFields] = useState<string[]>([]);
+  const [showCamera, setShowCamera] = useState(false);
 
   const handleChange = (key: string, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -32,7 +35,7 @@ export default function ApplicantForm({ jobTitle }: ApplicantFormProps) {
 
     setErrorFields([]);
     setSubmitted(true);
-    console.log("Submitted Application:", formData);
+    console.log("✅ Submitted Application:", formData);
   };
 
   return (
@@ -58,12 +61,30 @@ export default function ApplicantForm({ jobTitle }: ApplicantFormProps) {
             className="object-cover w-full h-full"
           />
         </div>
+
         <button
           type="button"
+          onClick={() => setShowCamera((prev) => !prev)}
           className="mt-3 flex items-center gap-2 text-sm text-blue-600 font-medium border border-blue-500 rounded-md px-3 py-1.5 hover:bg-blue-50"
         >
-          <FiCamera /> Take a Picture
+          <FiCamera /> {showCamera ? "Close Camera" : "Take a Picture"}
         </button>
+
+        {/* Camera Section */}
+        {showCamera && (
+          <div
+            id="handcam-area"
+            className="mt-4 w-full flex justify-center border-t border-gray-200 pt-4"
+          >
+            <HandGestureCamera
+              onSave={(dataUrl) => {
+                handleChange("photo", dataUrl);
+                setShowCamera(false);
+              }}
+              showButton={true}
+            />
+          </div>
+        )}
       </div>
 
       {/* Form */}
@@ -104,15 +125,10 @@ export default function ApplicantForm({ jobTitle }: ApplicantFormProps) {
                   </label>
                 </div>
               ) : field.key === "birth_date" ? (
-                <input
-                  type="date"
-                  value={formData.birth_date || ""}
-                  onChange={(e) => handleChange("birth_date", e.target.value)}
-                  className={`border rounded-md px-3 py-2 w-full text-sm ${
-                    errorFields.includes(field.key)
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  }`}
+                <DatePicker
+                  value={formData.birth_date}
+                  onChange={(v) => handleChange("birth_date", v)}
+                  error={errorFields.includes(field.key)}
                 />
               ) : (
                 <input
@@ -130,6 +146,7 @@ export default function ApplicantForm({ jobTitle }: ApplicantFormProps) {
             </div>
           ))}
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={submitted}
